@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 
 namespace Dotnetcorereactts
 {
@@ -29,7 +30,12 @@ namespace Dotnetcorereactts
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services
+                .AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = 
+                    new DefaultContractResolver());
+            
+            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +58,9 @@ namespace Dotnetcorereactts
             }
 
             app.UseStaticFiles();
+
+            app.UseWebSockets();
+            app.UseSignalR();
 
             app.UseMvc(routes =>
             {
