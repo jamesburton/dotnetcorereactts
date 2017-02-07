@@ -52,7 +52,7 @@
   },
   "scripts": {
     "build": "dotnet build",
-    "dockerbuild": "docker -t jamesburton/dotnetcorereactts .",
+    "dockerbuild": "docker build -t jamesburton/dotnetcorereactts .",
     "dockerpush": "docker push jamesburton/dotnetcorereactts:latest",
     "start": "dotnet watch run"
   }
