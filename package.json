@@ -24,10 +24,12 @@
     "css-loader": "^0.23.1",
     "domain-task": "^2.0.1",
     "event-source-polyfill": "^0.0.7",
+    "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^2.0.0-rc",
     "file-loader": "^0.8.5",
     "jquery": "^2.2.1",
     "json-loader": "^0.5.4",
+    "ms-signalr-client": "^2.2.5",
     "node-noop": "^1.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -36,6 +38,7 @@
     "react-router-redux": "^4.0.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "signalr": "^2.2.1",
     "style-loader": "^0.13.0",
     "typescript": "^2.0.3",
     "url-loader": "^0.5.7",
@@ -44,6 +47,13 @@
     "webpack-merge": "^0.14.1"
   },
   "devDependencies": {
+    "@types/redux-thunk": "^2.1.0",
     "@types/signalr": "^2.2.33"
+  },
+  "scripts": {
+    "build": "dotnet build",
+    "dockerbuild": "docker -t jamesburton/dotnetcorereactts .",
+    "dockerpush": "docker push jamesburton/dotnetcorereactts:latest",
+    "start": "dotnet watch run"
   }
 }
