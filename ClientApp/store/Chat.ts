@@ -1,12 +1,6 @@
-// / <reference path="../../node_modules/@types/signalr/index.d.ts" />
+/// <reference path="../../node_modules/@types/jquery/index.d.ts" />
+/// <reference path="../../node_modules/@types/signalr/index.d.ts" />
 import { Action, Reducer } from 'redux';
-//import * as $ from 'jquery';
-import * as $ from 'jquery';
-//import {  } from 'signalr';
-//import * as SignalR from 'signalr';
-
-//import 'expose-loader?jQuery!jquery';
-////import '../node_modules/signalr/jquery.signalR.js';
 //import 'ms-signalr-client';
 
 // -----------------
@@ -24,17 +18,10 @@ export interface ChatHubProxy {
     server: IChatHubServer;
 }
 
-/*
-var _chatHub: any;
-//var _$ = $ as any
-var _$ = window ? (window as any).$ : null;
-_chatHub = (_$ && _$.connection && _$.connection.chatHub ? _$.connection.chatHub : null) as ChatHubProxy;
-console.log('$=', _$);
-console.log('$.connection=', _$.connection);
-console.log('_chatHub=', _chatHub);
-*/
+//declare var $:JQueryStatic;
+//var _chatHub = typeof $ !== 'undefined' ? $.connection ? ($.connection as any).chatHub as ChatHubProxy : 'No connection' : 'No jQuery';
 var _chatHub = null;
-console.log('$=', $);
+console.log(_chatHub);
 
 export interface ChatState {
     //count: number;
