@@ -1,4 +1,8 @@
+/// <reference path="../../node_modules/@types/jquery/index.d.ts" />
+/// <reference path="../../node_modules/@types/signalr/index.d.ts" />
+
 import * as React from 'react';
+
 //import { connect } from 'react-redux';
 //import { ApplicationState }  from '../store';
 
@@ -7,7 +11,8 @@ import * as React from 'react';
 class Chat extends React.Component<void, void> {
     //componentWillMount() {}
     componentDidMount() { 
-        if(alert) alert('Chat mounted');
+        //if(alert) alert('Chat mounted');
+        console.debug('Chat mounted');
     }
     public render() {
         return <div>

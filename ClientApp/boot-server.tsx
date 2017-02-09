@@ -1,3 +1,5 @@
+export var $connection:SignalR = null;
+
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
@@ -6,6 +8,11 @@ import createMemoryHistory from 'history/lib/createMemoryHistory';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 import routes from './routes';
 import configureStore from './configureStore';
+
+/*
+declare var global;
+console.log('boot-server.tsx:- window=', typeof window === 'undefined' ? 'undefined' : window, ', global=', typeof global === 'undefined' ? 'undefined' : global);
+//*/
 
 export default createServerRenderer(params => {
     return new Promise<RenderResult>((resolve, reject) => {

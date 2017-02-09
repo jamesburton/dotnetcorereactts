@@ -1,7 +1,17 @@
 /// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 /// <reference path="../../node_modules/@types/signalr/index.d.ts" />
 import { Action, Reducer } from 'redux';
-//import 'ms-signalr-client';
+
+//export var $connection : SignalR = null;
+if(typeof window !== 'undefined' && window && window['$']) {
+    console.log('Chat.ts:- $=', window['$']);
+    (window as any).$connection = null as SignalR;
+}
+
+
+//declare var $connection : SignalR;
+//console.log('$connection=', typeof $connection === 'undefined' ? 'undefined' : $connection);
+//console.log('window.$connection=', typeof window === 'undefined' ? 'window undefined' : typeof (window as any).$connection === 'undefined' ? 'undefined' : (window as any).$connection);
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.

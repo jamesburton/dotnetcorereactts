@@ -27,7 +27,7 @@ module.exports = (env) => {
     // Configuration for client-side bundle suitable for running in browsers
     const clientBundleOutputDir = './wwwroot/dist';
     const clientBundleConfig = merge(sharedConfig(), {
-        entry: { 'main-client': './ClientApp/boot-client.tsx' },
+        entry: { 'main-client': ['jquery', './ClientApp/boot-client.tsx'] },
         module: {
             rules: [
                 { test: /\.css$/, use: ExtractTextPlugin.extract({ loader: 'css-loader' }) },
@@ -36,6 +36,7 @@ module.exports = (env) => {
         },
         output: { path: path.join(__dirname, clientBundleOutputDir) },
         plugins: [
+            new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
             new ExtractTextPlugin('site.css'),
             new webpack.DllReferencePlugin({
                 context: __dirname,
