@@ -14,9 +14,18 @@ module.exports = (env) => {
             rules: [
                 { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
             ]
+            /*
+            ,
+            loaders: [
+                { test: require.resolve("react"), loader: "expose-loader?React" },
+                { test: require.resolve("jquery"), loader: "expose-loader?$!expose-loader?jQuery" },
+                { test: require.resolve("signalr"), loader: "expose-loader?SignalR" }
+            ]
+            */
         },
         entry: {
             vendor: [
+                'jquery',
                 'bootstrap',
                 'bootstrap/dist/css/bootstrap.css',
                 'domain-task',
@@ -29,7 +38,6 @@ module.exports = (env) => {
                 'redux-thunk',
                 'react-router-redux',
                 'style-loader',
-                'jquery',
                 'signalr'
             ],
         },
