@@ -61,9 +61,12 @@ $.getScript(signalRHubUrl, (data, status, xhr) => {
 
     // *** Add ChatHub proxy routines
     var hub = ($.connection as any).chatHub;
-    hub.client.messageReceived = (originatorUser:string, message:string) => { console.log('boot-client.tsx default handler for SignalR chatHub.client.messageReceived:\r\noriginatorUser=', originatorUser, '\r\nmessage=', message); };
-    hub.client.getConnectedUsers = (connectedUsers:string[]) => { console.log('boot-client.tsx default handler for SignalR chatHub.client.getConnectedUsers:\r\nconnectedUsers=', connectedUsers); };
-    hub.client.newUserAdded = (newUser:string) => { console.log('boot-client.tsx default handler for SignalR chatHub.client.newUserAdded:\r\nnewUser=', newUser); };
+    //hub.client.messageReceived = (originatorUser:string, message:string) => { console.log('boot-client.tsx default handler for SignalR chatHub.client.messageReceived:\r\noriginatorUser=', originatorUser, '\r\nmessage=', message); };
+hub.client.messageReceived = (originatorUser:string, message:string) => { console.log('boot-client.tsx default handler for SignalR chatHub.client.messageReceived:\r\noriginatorUser=', originatorUser, '\r\nmessage=', message); store.dispatch(chat.messageReceived(originatorUser, message)) };
+    //hub.client.getConnectedUsers = (connectedUsers:string[]) => { console.log('boot-client.tsx default handler for SignalR chatHub.client.getConnectedUsers:\r\nconnectedUsers=', connectedUsers); };
+    hub.client.getConnectedUsers = (connectedUsers:string[]) => { console.log('boot-client.tsx default handler for SignalR chatHub.client.getConnectedUsers:\r\nconnectedUsers=', connectedUsers); store.dispatch(chat.connectedUsers(connectedUsers)); };
+    //hub.client.newUserAdded = (newUser:string) => { console.log('boot-client.tsx default handler for SignalR chatHub.client.newUserAdded:\r\nnewUser=', newUser); };
+    hub.client.newUserAdded = (newUser:string) => { console.log('boot-client.tsx default handler for SignalR chatHub.client.newUserAdded:\r\nnewUser=', newUser); store.dispatch(chat.newUserAdded(newUser)); };
 
     // Dispatch a call to add the hub to the chat state
     store.dispatch(chat.setHub(hub));
