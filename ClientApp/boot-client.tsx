@@ -56,7 +56,8 @@ ReactDOM.render(
 
 declare var signalRHubUrl:string;
 $.getScript(signalRHubUrl, (data, status, xhr) => {
-    console.log('Got script from signalRHubUrl: url=', signalRHubUrl, ', data=', data, ', status=', status);
+    //console.log('Got script from signalRHubUrl: url=', signalRHubUrl, ', data=', data, ', status=', status);
+    console.log('*Loaded SignalR Hub script*');
 
     // *** Add ChatHub proxy routines
     var hub = ($.connection as any).chatHub;
@@ -83,7 +84,10 @@ $.getScript(signalRHubUrl, (data, status, xhr) => {
         // Show that we are connected
         //var user = "Example User";
         var user = prompt("What is your name?", "Example User");
+        store.dispatch(chat.setName(user));
         hub.server.connect(user || "Unnamed");
+        hub.server.send(user, 'Hello');
+        hub.server.getConnectedUsers();
 
         // *** Add other hub initialisation routines ehre if required
 

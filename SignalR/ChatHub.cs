@@ -12,6 +12,10 @@ namespace dotnetcorereactts.SignalR
             Clients.All.MessageReceived(originatorUser, message);
         }
 
+        public void GetConnectedUsers() {
+            Clients.Caller.GetConnectedUsers(ConnectedUsers);
+        }
+
         public void Connect(string newUser)
         {
             if (ConnectedUsers == null)

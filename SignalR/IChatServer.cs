@@ -4,5 +4,6 @@ namespace dotnetcorereactts.SignalR
     {
         void Send(string originatorUser, string message);
         void Connect(string newUser);
+        void GetConnectedUsers();
     }
 }
