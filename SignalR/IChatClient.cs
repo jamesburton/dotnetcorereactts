@@ -11,5 +11,7 @@ namespace dotnetcorereactts.SignalR
         void GetConnectedUsers(List<string> connectedUsers);
         [HubMethodName("newUserAdded")]
         void NewUserAdded(string newUser);
+        [HubMethodName("info")]
+        void Info(string message);
     }
 }

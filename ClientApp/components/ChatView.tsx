@@ -24,12 +24,20 @@ class ChatView extends React.Component<ChatViewProps, void> {
                 </div>
                 <div>
                     <h5>Messages</h5>
+                    <ul>
+                        { props.messages
+                            ? props.messages.map(message => <li key={message.id}><b>{message.originatorUser}:-</b> <span dangerouslySetInnerHTML={{ __html: message.message }}></span></li>)
+                            : <li><em>NO MESSAGES</em></li>}
+                    </ul>
                 </div>
             </div>
             <div>
                 <h5>New Mesage</h5>
                 <input ref={input => this.messageInput=input} />
+                {/*
                 <button onClick={ () => alert('To be written') }>Send</button>
+                */}
+                <button onClick={ () => props.sendMessage(this.messageInput.value) }>Send</button>
             </div>
         </div>;
     }

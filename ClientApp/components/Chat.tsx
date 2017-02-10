@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import { ApplicationState }  from '../store';
 import * as ChatStore from '../store/Chat';
 //import * as WeatherForecasts from '../store/WeatherForecasts';
-import ChatView from './ChatView';
+//import ChatView from './ChatView';
+import ChatViewContainer from '../containers/ChatViewContainer';
 
 type ChatProps = ChatStore.ChatState & typeof ChatStore.actionCreators;
 class Chat extends React.Component<ChatProps, void> {
@@ -27,17 +28,26 @@ class Chat extends React.Component<ChatProps, void> {
 
             { props.hub 
                 //? <ChatView hub={props.hub} />
-                ? <ChatView {...props} />
+                //? <ChatView {...props} />
+                //? <ChatViewContainer {...props} />
+                /*? <ChatViewContainer messages={props.messages} users={props.users} 
+                    sendMessage={props.sendMessage} name={props.name} setName={props.setName} 
+                    connectedUsers={props.connectedUsers} dummy={props.dummy}
+                    messageReceived={props.messageReceived} newUserAdded={props.newUserAdded}
+                    hub={props.hub} setHub={null} /> //*/
+                ? <ChatViewContainer />
                 : <div><em>Please wait, hub loading</em></div>
             }
+
+            <div>{JSON.stringify(props.messages)}</div>
         </div>;
     }
 }
 
 //*
 export default connect(
-    (state: ApplicationState) => state.chat,    // Selects which state properties are merged into the component's props
-    ChatStore.actionCreators                 // Selects which action creators are merged into the component's props
+    (state: ApplicationState) => state.chat    // Selects which state properties are merged into the component's props
+    //,ChatStore.actionCreators                 // Selects which action creators are merged into the component's props
 )(Chat);
 //*/
 //export default Chat;

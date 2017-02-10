@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
+using System;
 
 namespace dotnetcorereactts.SignalR
 {
@@ -21,9 +22,15 @@ namespace dotnetcorereactts.SignalR
             if (ConnectedUsers == null)
                 ConnectedUsers = new List<string>();
 
-            ConnectedUsers.Add(newUser);
             Clients.Caller.GetConnectedUsers(ConnectedUsers);
-            Clients.Others.NewUserAdded(newUser);
+            if(!ConnectedUsers.Contains(newUser))
+            {
+                ConnectedUsers.Add(newUser);
+                Clients.Others.NewUserAdded(newUser);
+            } else {
+                Clients.Others.Info($"{newUser} (re-)connected @ {DateTime.Now}");
+            }
+            Clients.Caller.Info($"Connected @ {DateTime.Now}");
         }
     }
 }
