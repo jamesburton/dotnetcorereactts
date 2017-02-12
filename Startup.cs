@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dotnetcorereactts.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -22,6 +24,11 @@ namespace Dotnetcorereactts
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            using(var db = new SqliteApplicationDbContext()) {
+                //db.Database.EnsureCreated();  // NB: Incompatible with .Migrate() which will create if missing
+                db.Database.Migrate();
+            }
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -35,7 +42,10 @@ namespace Dotnetcorereactts
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = 
                     new DefaultContractResolver());
             
+            services.AddEntityFrameworkSqlite().AddDbContext<SqliteApplicationDbContext>();
             services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
+            services.AddDbContext<SqliteApplicationDbContext>(ServiceLifetime.Scoped);
+            //services.AddScoped(...)
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
