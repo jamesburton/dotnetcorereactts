@@ -1,0 +1,32 @@
+@model IEnumerable<dotnetcorereactts.Models.StaffMember>
+
+<div>
+    <a href="~/CMS/StaffMember/Create" class="btn btn-primary">Create Staff Member</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name(s)</th>
+            <th>Surname</th>
+            <th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(!Model?.Any() ?? false) {
+            <tr><td colspan="4"><em>No records found</em></td></tr>
+        } else {
+            foreach(var staffMember in Model) {
+            <tr>
+                <td>@staffMember.Id</td>
+                <td>@staffMember.FirstNames</td>
+                <td>@staffMember.Surname</td>
+                <td>
+                    [Controls]
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
